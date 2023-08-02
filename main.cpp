@@ -1,9 +1,21 @@
 #include <iostream>
 
+class MyClass
+{
+public:
+	int MyMemberFunction(float x) 
+	{
+		return 0;
+	}
+
+};
+
+using FPtr = int (MyClass::*)(float);
 
 int main()
 {
-	
+	MyClass c;
+	FPtr p = MyClass::MyMemberFunction;
 }
 
 /*
@@ -81,4 +93,30 @@ int main()
 	}
 	delete p;
 }
+*/
+
+/*
+	using FunctionPtr = int(*)(float, int); // c++
+typedef int (*FPtr)(float, int); // c
+int MyFunction(float arg1, int arg2)
+{
+	std::cout << arg1 << "," << arg2 << std::endl;
+	return 0;
+}
+
+int main()
+{
+	int (*p)(float, int);
+	p = &MyFunction;
+	(*p)(1.1f, 1);
+
+	FunctionPtr p2;
+	p2 = MyFunction;
+	p2(1.1f, 1);
+
+	FPtr p3;
+	p3 = MyFunction;
+	p3(1.1f, 1);
+}
+
 */
