@@ -1,21 +1,36 @@
 #include <iostream>
 
-class MyClass
-{
-public:
-	int MyMemberFunction(float x) 
-	{
-		return 0;
-	}
+template<typename T>
+void Sort(T* array, size_t size) {
+    for (size_t i = 0; i < size - 1; i++) {
+        for (size_t j = 0; j < size - i - 1; j++) {
+            if (array[j] > array[j + 1]) {
+                T temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
+        }
+    }
+}
 
-};
+template<typename F>
+void Print(F* array, size_t size) {
+    for (size_t i = 0; i < size; i++) {
+        std::cout << array[i] << " ";
+    }
+	std::cout << std::endl;
+}
 
-using FPtr = int (MyClass::*)(float);
+int main() {
+    int array1[]{1, 2, 3, 5, 4};
+    size_t size1 = sizeof(array1) / sizeof(array1[0]);
+    Sort(array1, size1);
+    Print(array1, size1);
 
-int main()
-{
-	MyClass c;
-	FPtr p = MyClass::MyMemberFunction;
+    float array2[]{1.1f, 2.5f, 3.0f, 5.1f, 4.4f};
+    size_t size2 = sizeof(array2) / sizeof(array2[0]);
+    Sort(array2, size2);
+    Print(array2, size2);
 }
 
 /*
@@ -119,4 +134,94 @@ int main()
 	p3(1.1f, 1);
 }
 
+*/
+
+/*
+	#include <iostream>
+
+class MyClass
+{
+public:
+	int MyMemberFunction(float x) 
+	{
+		std::cout << "멤버함수 호출" << std::endl;
+		return 0;
+	}
+	static float MyStaticFunction(int x)
+	{
+		std::cout << "정적함수 호출" << std::endl;
+		return 0.0f;
+	}
+};
+
+using FPtr1 = int (MyClass::*)(float);
+using FPtr2 = float (*)(int);
+
+int main()
+{
+	MyClass c;
+	FPtr1 p1 = &MyClass::MyMemberFunction;
+	(c.*p1)(1.1f);
+
+	FPtr2 p2 = &MyClass::MyStaticFunction;
+	p2(1);
+}
+*/
+
+/*
+	template<typename T>
+T Sum(T x, T y)
+{
+	T sum;
+	sum = x + y;
+	return sum;
+}
+
+int main()
+{
+	//암시적 표기법
+	std::cout << Sum(1,1) << std::endl;
+	std::cout << Sum(1.1f, 1.f) << std::endl;
+	std::cout << Sum('A','B') << std::endl;
+
+	//명시적 표기법
+	std::cout << Sum<int>(1,1) << std::endl;
+}
+*/
+
+/*
+	#include <iostream>
+
+template<typename T>
+void Sort(T* array, size_t size) {
+    for (size_t i = 0; i < size - 1; i++) {
+        for (size_t j = 0; j < size - i - 1; j++) {
+            if (array[j] > array[j + 1]) {
+                T temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
+        }
+    }
+}
+
+template<typename F>
+void Print(F* array, size_t size) {
+    for (size_t i = 0; i < size; i++) {
+        std::cout << array[i] << " ";
+    }
+	std::cout << std::endl;
+}
+
+int main() {
+    int array1[]{1, 2, 3, 5, 4};
+    size_t size1 = sizeof(array1) / sizeof(array1[0]);
+    Sort(array1, size1);
+    Print(array1, size1);
+
+    float array2[]{1.1f, 2.5f, 3.0f, 5.1f, 4.4f};
+    size_t size2 = sizeof(array2) / sizeof(array2[0]);
+    Sort(array2, size2);
+    Print(array2, size2);
+}
 */
