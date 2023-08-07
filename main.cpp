@@ -1,37 +1,12 @@
 #include <iostream>
+#include "OOPClass.h"
 
-template<typename T>
-void Sort(T* array, size_t size) {
-    for (size_t i = 0; i < size - 1; i++) {
-        for (size_t j = 0; j < size - i - 1; j++) {
-            if (array[j] > array[j + 1]) {
-                T temp = array[j];
-                array[j] = array[j + 1];
-                array[j + 1] = temp;
-            }
-        }
-    }
+int main() 
+{
+	OOPClass<int> c1;
+	c1.function(10);
 }
 
-template<typename F>
-void Print(F* array, size_t size) {
-    for (size_t i = 0; i < size; i++) {
-        std::cout << array[i] << " ";
-    }
-	std::cout << std::endl;
-}
-
-int main() {
-    int array1[]{1, 2, 3, 5, 4};
-    size_t size1 = sizeof(array1) / sizeof(array1[0]);
-    Sort(array1, size1);
-    Print(array1, size1);
-
-    float array2[]{1.1f, 2.5f, 3.0f, 5.1f, 4.4f};
-    size_t size2 = sizeof(array2) / sizeof(array2[0]);
-    Sort(array2, size2);
-    Print(array2, size2);
-}
 
 /*
 	#include <iostream>
@@ -224,4 +199,27 @@ int main() {
     Sort(array2, size2);
     Print(array2, size2);
 }
+*/
+
+/*
+	template<typename T>
+class OOPClass
+{
+public:
+	void function(T arg);
+};
+
+
+int main() 
+{
+	OOPClass<int> c1;
+	c1.function(1);
+}
+
+template<typename T>
+class OOPClass<T>::function(T arg)
+{
+	T temp = arg;
+	temp += arg;
+};
 */
